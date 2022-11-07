@@ -14,7 +14,6 @@ function App() {
   const inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
-    console.log(lowerCase);
     if (
       !space.test(lowerCase) &&
       lowerCase.length > 0 &&
@@ -27,6 +26,24 @@ function App() {
   const debouncedChangeHandler = useCallback(debounce(inputHandler, 1000), [
     inputText,
   ]);
+
+  const SelectAllhandling = (e) => {
+    if (e.target.checked) {
+      setInputText("");
+    }
+  };
+
+  const clearAllhandling = (e) => {
+    if (e.target.checked) {
+      setcheckboxdata([]);
+      setInputText("");
+    } else {
+      setcheckboxdata(
+        checkboxdata.filter((item) => item !== e.target.value)
+      );
+    }
+  };
+
 
   return (
     <div className="main">
@@ -43,9 +60,9 @@ function App() {
       </div>
 
       <div className="checkbox">
-        <input id="allfilter" type="checkbox" defaultChecked="checked" />
+        <input id="allfilter" type="checkbox" defaultChecked="checked" onChange={(e)=>{SelectAllhandling(e)}} />
         <label htmlFor="allfilter"> Select All</label>
-        <input id="clearfilter" type="checkbox" />
+        <input id="clearfilter" type="checkbox" onChange={(e)=>{clearAllhandling(e)}} />
         <label htmlFor="clearfilter"> Clear All</label>
       </div>
       <div className="checkbox-container">
