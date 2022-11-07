@@ -1,31 +1,32 @@
-import { React, useState,useEffect } from "react";
+import { React, useState, useCallback } from "react";
 import TextField from "@mui/material/TextField";
 import List from "./Components/List";
 import Checkbox from "./Components/Checkbox/Checkbox";
+import debounce from "lodash.debounce";
+
 import "./App.css";
 function App() {
   const [inputText, setInputText] = useState("");
   const [checkboxdata, setcheckboxdata] = useState([]);
+
+  const space = new RegExp(" ");
+
   const inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
-    setInputText(lowerCase)
-    setcheckboxdata([...checkboxdata, lowerCase]);
-    
+    setInputText(lowerCase);
+    console.log(lowerCase);
+    if (
+      !space.test(lowerCase) &&
+      lowerCase.length > 0 &&
+      !checkboxdata.includes(lowerCase)
+    ) {
+      setcheckboxdata([...checkboxdata, lowerCase]);
+    }
   };
 
-  const clickHandler = (e) => {
-    if (e.target.checked) {
-
-    }
-}
-
-useEffect(() => {
-    return () => {
-      
-    }
-    
-}, [inputText])
-
+  const debouncedChangeHandler = useCallback(debounce(inputHandler, 1000), [
+    inputText,
+  ]);
 
   return (
     <div className="main">
@@ -34,7 +35,7 @@ useEffect(() => {
         <TextField
           className="search-bar"
           id="outlined-basic"
-          onChange={inputHandler}
+          onChange={debouncedChangeHandler}
           variant="outlined"
           fullWidth
           label="Search"
@@ -42,12 +43,14 @@ useEffect(() => {
       </div>
 
       <div className="checkbox">
-        <Checkbox key={checkboxdata} checkboxdata={checkboxdata} />
-        <input type="checkbox" defaultChecked="checked" onClick={clickHandler} />
-        <label for="filter"> Select All</label>
-        <input type="checkbox" />
-        <label for="filter"> Clear All</label>
+        <input id="allfilter" type="checkbox" defaultChecked="checked" />
+        <label htmlFor="allfilter"> Select All</label>
+        <input id="clearfilter" type="checkbox" />
+        <label htmlFor="clearfilter"> Clear All</label>
       </div>
+      <div className="checkbox-container">
+          <Checkbox checkboxdata={checkboxdata} />
+        </div>
       <List input={inputText} />
     </div>
   );

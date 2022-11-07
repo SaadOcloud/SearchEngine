@@ -35,3 +35,10 @@ ul li {
     display: block;
     
 }
+.checkbox-container{
+    display: flex;    
+}
+
+.checkbox{
+    align-items: center;
+}
