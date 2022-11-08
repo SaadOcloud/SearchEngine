@@ -10,5 +10,6 @@ const { validationHandler } = require('../middleware/validateMiddleware')
 
 
 router.route('/').get(userList).post(createUser)
+router.route('/:query').get(userList).post(createUser)
 
 module.exports = router

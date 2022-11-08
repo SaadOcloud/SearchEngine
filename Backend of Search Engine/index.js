@@ -4,13 +4,14 @@ const mongoose = require("mongoose");
 const config=require('dotenv').config();
 const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 const connectDB = require("./config/DB")
-
+const cors = require('cors')
 
 const Users = require("./routes/userRoutes");
 
 connectDB()
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 app.use("/api/user", Users);
