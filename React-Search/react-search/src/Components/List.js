@@ -1,5 +1,6 @@
 import axios from "axios";
 import { React, useEffect, useState } from "react";
+import "./List.css";
 
 function List({input}) {
     const [users, setUsers] = useState([]);
@@ -11,18 +12,19 @@ function List({input}) {
         console.log(error)
       }
     }
+
   useEffect(() => {
     getUsers();
   }, [input])
 
   return (
-    <ul>
+    <div className="list-parent">
+    <ul className="list-container">
       {users.map((item) => (
-        <li key={item._id}>{item.username}</li>
+        <li className="list" key={item._id}>{item.username}</li>
       ))}
     </ul>
+    </div>
   );
 }
-
-
 export default List;

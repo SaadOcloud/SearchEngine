@@ -35,10 +35,19 @@ ul li {
   display: block;
   
 }
-.checkbox-container{
-  display: flex;    
-}
-
 .checkbox{
+  display: flex;
   align-items: center;
+  justify-content: row;
+  flex-direction: row;
+  margin: 10px;
+  padding: 10px;
+}
+.list-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  overflow: auto;
 }

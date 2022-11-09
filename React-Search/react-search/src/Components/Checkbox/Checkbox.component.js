@@ -1,18 +1,27 @@
 import React from "react";
+import './Checkbox.Style.css';
+// import { useState } from "react";
 
-function Checkbox({ checkboxdata, clearAllhandling }) {
+
+function Checkbox({ checkboxdata, inputHandler, checked }) {
+  console.log(checked)
   return (
-    <div className="checkbox">
+    <div className="checkbox-container">
+      <div className="checkboxes">
       {checkboxdata.map((item) => (
-        <div key={item}>
+        <div className="items" key={item}>
           <input
-            type="checkbox"
+            type="radio"
+            id={item}
+            name="filter"
+            checked={checked === item}
+            onClick={() => inputHandler(item)}
             value={item}
-            onChange={clearAllhandling}
           />
           {item}
         </div>
       ))}
+      </div>
     </div>
   );
 }

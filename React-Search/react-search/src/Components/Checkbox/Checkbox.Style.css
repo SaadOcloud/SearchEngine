@@ -1,0 +1,16 @@
+.checkbox-container{
+    align-self: center;
+  }
+
+  .checkboxes{
+    display: flex;
+  }
+
+  .items[type=radio]{
+    align-items: center;
+    border-radius: 5px;
+    display: block;
+    margin: 5px;
+    
+  }
+
