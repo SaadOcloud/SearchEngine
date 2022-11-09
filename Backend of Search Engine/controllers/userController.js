@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 
 const userList = asyncHandler(async (req, res) => {
   const { query } = req.params;
-  console.log(query);
   const users = await (query
     ? User.find({ username: { $regex: ".*" + query + ".*" } })
     : User.find({}));
